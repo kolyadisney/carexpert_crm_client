@@ -1,0 +1,14 @@
+.app-header {
+  @apply flex flex-1 h-full justify-end items-center text-white;
+  .ant-typography {
+    @apply text-white font-semibold mr-2;
+  }
+
+  .ant-avatar {
+    @apply bg-gradient-to-tl from-orange-500 to-orange-700;
+  }
+
+  .ant-avatar.active {
+    @apply shadow-3xl shadow-orange-500/40;
+  }
+}

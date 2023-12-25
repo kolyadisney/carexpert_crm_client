@@ -1,0 +1,47 @@
+// Descriptions
+.ant-descriptions {
+  &.ant-descriptions-bordered {
+    .ant-descriptions-title {
+      margin-bottom: 10px;
+    }
+
+    .ant-descriptions-view {
+      border-left: 4px solid $color-main !important;
+
+      .ant-descriptions-item-label {
+        width: .1%;
+        min-width: 110px;
+        vertical-align: top;
+      }
+
+      .ant-descriptions-item-content {
+        background-color: transparent;
+      }
+    }
+
+
+
+    &.ant-descriptions-small {
+      .ant-descriptions-view {
+        .ant-descriptions-item-label,
+        .ant-descriptions-item-content {
+          padding: 8px 12px;
+        }
+      }
+    }
+
+    &.ant-descriptions-label-type-icon {
+      .ant-descriptions-view {
+        .ant-descriptions-item-label {
+          min-width: 48px;
+          text-align: center;
+
+          .anticon {
+            color: #b9b9b9;
+            font-size: 19px;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,11 @@
+.app-profile {
+  @apply flex flex-col justify-center items-center flex-1 w-full flex-wrap;
+
+  .ant-avatar {
+    @apply w-[100px] h-[100px] flex items-center justify-center;
+  }
+
+  .ant-descriptions {
+    @apply w-full;
+  }
+}

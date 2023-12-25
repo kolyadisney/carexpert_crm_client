@@ -1,0 +1,11 @@
+.app-main {
+  .ant-btn {
+    &.ant-btn-primary {
+      @apply bg-gradient-to-tr from-orange-500 to-orange-700 text-white hover:from-orange-500 hover:to-orange-700 hover:opacity-90 #{!important};
+
+      &.ant-btn-dangerous {
+        @apply bg-gradient-to-tr from-red-500 to-red-700 text-white hover:from-red-500 hover:to-red-700 hover:opacity-90 #{!important};
+      }
+    }
+  }
+}

@@ -1,0 +1,11 @@
+.app-menu {
+  &.ant-menu {
+    @apply bg-transparent text-white p-1.5;
+    .ant-menu-item {
+      @apply bg-transparent text-gray-300 hover:text-white #{!important};
+    }
+    .ant-menu-item-selected {
+      @apply bg-gradient-to-tl from-orange-500 to-orange-700 text-white #{!important};
+    }
+  }
+}

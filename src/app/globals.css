@@ -2,26 +2,42 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
+@layer components {
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+
+
+
+
+
+    /*Description*/
+
+    .app-main .ant-descriptions.ant-descriptions-bordered .ant-descriptions-title {
+        margin-bottom: 10px;
+    }
+    .app-main .ant-descriptions.ant-descriptions-bordered .ant-descriptions-view {
+        border-left: 4px solid #f97316;
+    }
+    .app-main .ant-descriptions.ant-descriptions-bordered .ant-descriptions-view .ant-descriptions-item-label {
+        width: 0.1%;
+        min-width: 110px;
+        vertical-align: top;
+    }
+    @media screen and (max-width: 992px) {
+        .ant-descriptions.ant-descriptions-bordered .ant-descriptions-view .ant-descriptions-item-label {
+            white-space: nowrap;
+        }
+    }
+
+    .app-main .ant-descriptions.ant-descriptions-bordered.ant-descriptions-small .ant-descriptions-view .ant-descriptions-item-label, .ant-descriptions.ant-descriptions-bordered.ant-descriptions-small .ant-descriptions-view .ant-descriptions-item-content {
+        padding: 8px 12px;
+    }
+    .app-main .ant-descriptions.ant-descriptions-bordered.ant-descriptions-label-type-icon .ant-descriptions-view .ant-descriptions-item-label {
+        min-width: 48px;
+        text-align: center;
+    }
+    .app-main .ant-descriptions.ant-descriptions-bordered.ant-descriptions-label-type-icon .ant-descriptions-view .ant-descriptions-item-label .anticon {
+        color: #b9b9b9;
+        font-size: 19px;
+    }
 }

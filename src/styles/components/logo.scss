@@ -1,0 +1,11 @@
+.app-logo {
+  @apply flex justify-center my-[20px];
+
+  img {
+    @apply w-[120px]
+  }
+}
+
+.ant-layout-sider-collapsed .app-logo img {
+  @apply w-[45px]
+}
