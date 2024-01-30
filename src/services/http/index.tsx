@@ -16,7 +16,7 @@ import { makeAuthorizationHeader } from '@/utils/common';
 | https://bezkoder.com/node-js-jwt-authentication-mysql/
 */
 const http: AxiosInstance = axios.create({
-  baseURL: 'http://localhost:5000',
+  baseURL: process.env.WEB_API_URL,
   headers: {
     'Content-Type': 'application/json',
     Accept: 'application/json',
@@ -24,12 +24,16 @@ const http: AxiosInstance = axios.create({
 });
 
 const requestInterceptor = (config: InternalAxiosRequestConfig) => {
-  const access_token = getCookie('access_token');
-  if (access_token) {
-    config.headers['Authorization'] = makeAuthorizationHeader(access_token);
+  if (config.url === '/auth/refresh') {
+    const refresh_token = getCookie('refresh_token');
+    config.headers['Authorization'] = makeAuthorizationHeader(refresh_token);
+  } else {
+    const access_token = getCookie('access_token');
+    if (access_token) {
+      config.headers['Authorization'] = makeAuthorizationHeader(access_token);
+    }
   }
-  config.headers['TimezoneId'] =
-    window.Intl.DateTimeFormat().resolvedOptions().timeZone;
+
   return config;
 };
 const responseInterceptorOnSuccess = (

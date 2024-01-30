@@ -1,6 +1,12 @@
 // Descriptions
 .ant-descriptions {
+  a {
+    @apply text-white hover:text-orange-500 #{!important};
+  }
   &.ant-descriptions-bordered {
+    .ant-descriptions-header {
+      margin-bottom: 0;
+    }
     .ant-descriptions-title {
       margin-bottom: 10px;
     }
@@ -43,5 +49,62 @@
         }
       }
     }
+  }
+}
+
+.ant-form-item-required {
+  &:before {
+    display: none !important;
+  }
+}
+
+.ant-card {
+  &.app-car__info-card {
+    &.ant-card-bordered {
+      border-left: 3px solid $color-main;
+    }
+
+    .ant-card-head {
+      border-bottom: 1px solid rgba(253, 253, 253, 0.12);
+      margin-bottom: 0;
+    }
+
+    .ant-card-body {
+      padding: 0;
+    }
+
+    .ant-descriptions {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+
+      .ant-descriptions-view {
+        border: none !important;
+      }
+    }
+  }
+}
+
+.ant-segmented-thumb {
+  @apply bg-gradient-to-tr from-orange-500 to-orange-700 rounded-md #{!important};
+}
+
+.ant-segmented-item {
+  &.ant-segmented-item-selected {
+    .ant-segmented-item-label {
+      @apply bg-gradient-to-tr from-orange-500 to-orange-700 rounded-md #{!important};
+    }
+  }
+}
+
+.ant-notification-notice-wrapper {
+  @apply bg-gradient-to-b from-[]
+}
+
+.ant-badge {
+  .ant-badge-count {
+    @apply bg-gradient-to-tr from-red-500 to-red-700
+  }
+  .ant-scroll-number-only-unit {
+    @apply text-white;
   }
 }

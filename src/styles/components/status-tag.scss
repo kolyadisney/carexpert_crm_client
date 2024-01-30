@@ -1,0 +1,29 @@
+.ant-tag {
+  &.new {
+    @apply bg-red-700 uppercase font-bold border-0
+  }
+
+  &.rejected {
+    @apply bg-gray-500 uppercase font-bold border-0
+  }
+
+  &.in-progress{
+    @apply bg-green-700 uppercase font-bold border-0
+  }
+
+  &.completed {
+    @apply bg-blue-800 uppercase font-bold border-0
+  }
+
+  &.hold {
+    @apply bg-yellow-700 uppercase font-bold border-0
+  }
+
+  &.in-stock {
+    @apply bg-lime-700 uppercase font-bold border-0
+  }
+
+  &.out-of-stock {
+    @apply bg-red-700 uppercase font-bold border-0
+  }
+}

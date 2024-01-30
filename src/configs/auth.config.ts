@@ -7,6 +7,7 @@ import { setCookie } from 'cookies-next';
 export const authConfig: AuthOptions = {
   pages: {
     signIn: '/login',
+    signOut: '/login',
   },
   providers: [
     Credentials({
@@ -29,13 +30,16 @@ export const authConfig: AuthOptions = {
             login: credentials?.login,
             password: credentials?.password,
           };
-          const res = await fetch('http://localhost:5000/auth/login', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
+          const res = await fetch(
+            `${process.env.NEXT_PUBLIC_WEB_API_URL}/auth/login`,
+            {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(body),
             },
-            body: JSON.stringify(body),
-          });
+          );
           const user = await res.json();
           if (user) {
             cookies().set({

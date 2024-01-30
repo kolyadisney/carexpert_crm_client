@@ -1,0 +1,12 @@
+// sass-lint:disable-all
+.app-main
+{
+	.app-page-heading {
+		$this: &;
+		@apply relative block p-0 m-0 mb-6;
+
+		&__title {
+			@apply font-bold text-white/[.85];
+		}
+	}
+}

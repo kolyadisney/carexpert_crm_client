@@ -1,7 +1,8 @@
 import React from 'react';
 import { AxiosError } from 'axios';
 import { List, notification } from 'antd';
-import { getCookie } from 'cookies-next';
+import { getCookie, setCookie } from 'cookies-next';
+import { api } from '@/services/api';
 
 const showErrors = (errors: Array<{ title: string }>) => {
   if (!errors.length) return;
@@ -37,13 +38,15 @@ const tokenRefreshFailure = (url?: string) => {
 };
 
 export const middleware: {
-  refreshToken(params: { error: AxiosError; callback?: () => void }): void;
+  refreshToken(): void;
   handleError(error: AxiosError): void;
 } = {
-  refreshToken({ callback }) {
-    const refresh_token = getCookie('access_token');
+  async refreshToken() {
+    const refresh_token = getCookie('refresh_token');
     if (refresh_token) {
-      //TODO: Refresh token 2
+      const tokens = await api.auth.refreshToken(refresh_token);
+      setCookie('access_token', tokens.access_token);
+      setCookie('refresh_token', tokens.refresh_token);
     }
   },
   handleError: (error) => {
@@ -64,7 +67,7 @@ export const middleware: {
           break;
 
         case 401: // Unauthorized
-          /** src/store/worker-middleware.ts:17 */
+          middleware.refreshToken();
           break;
 
         case 403: // Forbidden

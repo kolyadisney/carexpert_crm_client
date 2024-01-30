@@ -1,6 +1,6 @@
 .app-main {
   .ant-layout {
-    @apply h-[100vh] bg-gray-200;
+    @apply h-[100vh] bg-[#111];
 
     .ant-layout-sider {
       @apply bg-gradient-to-b from-[#222] to-[#111];
@@ -12,16 +12,16 @@
   }
 
   .ant-layout-content {
-    @apply overflow-auto m-14;
+    @apply overflow-auto p-2 sm:p-14 overflow-x-hidden relative;
   }
 
   .ant-layout .ant-layout-header{
-    @apply bg-gradient-to-r from-[#222] to-[#111]
+    @apply bg-gradient-to-r from-[#222] to-[#111] px-4 sm:px-[50px]
   }
 }
 
 .app-auth-layout {
-  @apply h-[100vh] bg-gradient-to-r from-[#222] to-[#111] items-center pl-4;
+  @apply h-[100vh] bg-gradient-to-r from-[#222] to-[#111] items-center;
 
   .ant-form {
     @apply max-w-[400px]

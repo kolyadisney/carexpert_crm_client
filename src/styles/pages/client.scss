@@ -1,0 +1,7 @@
+.app-client-info {
+  @apply flex flex-col justify-center items-center;
+
+  .ant-avatar {
+    @apply bg-gradient-to-tr from-orange-500 to-orange-700
+  }
+}

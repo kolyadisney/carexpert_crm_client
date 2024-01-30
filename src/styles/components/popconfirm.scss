@@ -1,0 +1,17 @@
+.app-main {
+  .ant-popover-inner {
+    @apply bg-gradient-to-b from-[#222] to-[#333] border-orange-500/30 border
+  }
+
+  .ant-popover-arrow {
+    &:before {
+      @apply bg-[#333]
+    }
+  }
+
+  .ant-popconfirm-buttons {
+    button {
+      @apply bg-[#222]
+    }
+  }
+}

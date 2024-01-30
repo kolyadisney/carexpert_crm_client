@@ -1,0 +1,7 @@
+.ant-table {
+  .ant-table-cell {
+    a {
+      @apply text-white hover:text-orange-500 #{!important};
+    }
+  }
+}

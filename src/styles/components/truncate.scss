@@ -1,0 +1,68 @@
+// sass-lint:disable-all
+.truncate {
+  $this: &;
+
+  position: relative;
+  display: block;
+  margin: 0;
+  padding: 0;
+  max-width: 100%;
+
+  svg {
+    @apply text-orange-500
+  }
+
+  &__icon-col {
+    flex-shrink: 0;
+  }
+
+  &__icon {
+    .ant-typography-copy {
+      margin: 0 !important;
+      font-size: 16px;
+    }
+  }
+
+  &__content-col {
+    flex: 1 1 0.001%;
+    min-width: 0;
+    width: auto;
+    max-width: none;
+  }
+
+  &__content {
+    margin: 0 !important;
+
+    a {
+      @apply text-white/80 #{!important}
+    }
+
+    &.ant-typography-ellipsis-single-line {
+      @apply max-w-full #{!important}
+    }
+
+    &.ant-typography-ellipsis-multiple-line {
+    }
+
+    .ant-descriptions-bordered & {
+      &.ant-typography-ellipsis-single-line {
+        white-space: normal;
+      }
+    }
+  }
+
+  &--phone {
+  }
+
+  &--email {
+  }
+
+  &--fax {
+  }
+
+  &--address {
+  }
+
+  &--text {
+  }
+}

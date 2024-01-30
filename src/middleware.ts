@@ -1,12 +1,16 @@
-export {default} from 'next-auth/middleware';
+export { default } from 'next-auth/middleware';
 
-const protectedRoutes = [
-    '/clients',
-    '/orders',
-    '/settings',
-    '/profile'
-]
+const protectedRoutes = ['/client', '/orders', '/settings', '/profile'];
 
 export const config = {
-    matcher: ['/clients', '/orders', '/settings', '/profile', '/']
-}
+  matcher: [
+    '/client',
+    '/orders',
+    '/cars',
+    '/settings',
+    '/profile',
+    '/',
+    '/settings/services',
+    '/appointments',
+  ],
+};

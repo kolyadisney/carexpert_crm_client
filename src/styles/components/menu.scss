@@ -1,11 +1,28 @@
-.app-menu {
-  &.ant-menu {
-    @apply bg-transparent text-white p-1.5;
-    .ant-menu-item {
-      @apply bg-transparent text-gray-300 hover:text-white #{!important};
+.app-main {
+  .app-menu {
+    &.ant-menu {
+      @apply bg-transparent text-white p-1.5;
+      .ant-menu-item {
+        @apply bg-transparent text-gray-300 hover:text-white select-none #{!important};
+      }
+
+      .ant-menu-item-selected:not(.ant-menu-item-only-child), .ant-menu-submenu-selected .ant-menu-submenu-title {
+        @apply bg-gradient-to-tl from-orange-500 to-orange-700 text-white #{!important};
+      }
+
+      .ant-menu-submenu-title:active {
+        @apply bg-white/[0.12];
+      }
+
+      .ant-menu-item-selected.ant-menu-item-only-child {
+        @apply text-white font-semibold bg-orange-700/20 select-none #{!important};
+      }
     }
-    .ant-menu-item-selected {
-      @apply bg-gradient-to-tl from-orange-500 to-orange-700 text-white #{!important};
+
+    &.ant-menu-submenu-selected {
+      .ant-menu-submenu-title {
+        @apply bg-gradient-to-tl from-orange-500 to-orange-700 text-white #{!important};
+      }
     }
   }
 }
