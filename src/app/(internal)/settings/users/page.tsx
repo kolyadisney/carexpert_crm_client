@@ -1,16 +1,58 @@
 'use client';
 import React from 'react';
-import { Table } from 'antd';
+import { Table, Tag } from 'antd';
 import { useGetAllUsersQuery } from '@/redux/api/user';
-import { useAppSelector } from '@/redux/hook';
+import { useAppDispatch, useAppSelector } from '@/redux/hook';
 import { makeTablePagination } from '@/components/tables/config';
-import { Box, PageHeading } from '@/components';
+import { Box, IPageHeadingAction, PageHeading } from '@/components';
 import { routes } from '@/routes';
 import { IUser } from '@/redux/types';
+import { UserRole, UserRoleColors, UserRoleNames } from '@/enums/roles';
+import { ReloadOutlined } from '@ant-design/icons';
+import { openModal } from '@/redux/slice/modalSlice';
+import { EModalsMap } from '@/components/modals/config';
+import { ActionTypes } from '@/enums/action-types';
 
 const UsersPage = () => {
   const filters = useAppSelector((state) => state.filters.userFilters);
-  const { data: users, isLoading, isFetching } = useGetAllUsersQuery(filters);
+  const {
+    data: users,
+    isLoading,
+    isFetching,
+    refetch,
+  } = useGetAllUsersQuery(filters);
+  const dispatch = useAppDispatch();
+  const pageHeadingActions = [
+    {
+      tooltip: {
+        title: 'Обновить',
+      },
+      button: {
+        type: 'dashed',
+        htmlType: 'button',
+        shape: 'circle',
+        icon: <ReloadOutlined />,
+        loading: isLoading || isFetching,
+        onClick: () => refetch(),
+      },
+    },
+    {
+      button: {
+        text: 'Добавить пользователя',
+        type: 'primary',
+        onClick: () =>
+          dispatch(
+            openModal({
+              name: EModalsMap.CREATE_UPDATE_USER,
+              modalProps: {
+                title: 'Добавить пользователя',
+                actionType: ActionTypes.ADD,
+              },
+            }),
+          ),
+      },
+    },
+  ].filter(Boolean) as IPageHeadingAction[];
   const columns: any = [
     {
       title: '№',
@@ -40,11 +82,17 @@ const UsersPage = () => {
       title: 'Роль',
       dataIndex: 'role',
       key: 'role',
+      render: (role: UserRole) => (
+        <Tag className={UserRoleColors[role]}>{UserRoleNames[role]}</Tag>
+      ),
     },
   ];
   return (
     <Box>
-      <PageHeading title={routes['users'].name()} />
+      <PageHeading
+        title={routes['users'].name()}
+        actions={pageHeadingActions}
+      />
       <Table
         loading={isLoading || isFetching}
         dataSource={users?.data || []}

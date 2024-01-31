@@ -12,10 +12,8 @@ import {
   Typography,
 } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
-import { signOut } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import { deleteCookie } from 'cookies-next';
-import { UserRoles } from '@/enums/roles';
+import { UserRoleColors, UserRoleNames } from '@/enums/roles';
 import { routes } from '@/routes';
 import { useGetCurrentUserQuery } from '@/redux/api/user';
 
@@ -42,14 +40,21 @@ const ProfilePage = () => {
 
   return (
     <Row>
-      <Col span={12} sm={24} xs={24}>
+      <Col span={24} sm={12} xs={12}>
         <Box>
           <div className="app-profile">
-            <Avatar shape={'circle'} size={'large'} icon={<UserOutlined />} />
+            <Avatar
+              shape={'circle'}
+              size={'large'}
+              icon={<UserOutlined />}
+              className={'!mb-4'}
+            />
             <Typography.Title level={3}>
               {data?.first_name} {data?.last_name}
             </Typography.Title>
-            <Tag color={'volcano'}>{UserRoles[data?.role]}</Tag>
+            <Tag className={UserRoleColors[data?.role!]}>
+              {UserRoleNames[data?.role!]}
+            </Tag>
             <Descriptions
               title={'Личная информация'}
               items={items}

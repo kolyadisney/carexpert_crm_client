@@ -1,11 +1,11 @@
-import { UserRoles } from '@/enums/roles';
+import { UserRole } from '@/enums/roles';
 export interface IUser {
   id: string;
   email: string;
   phone: string;
   first_name: string;
   last_name: string;
-  role: typeof UserRoles;
+  role: UserRole;
 }
 
 export interface IResponseData<T> {

@@ -1,3 +1,5 @@
+import React from 'react';
+
 export interface IBoxProps {
-    children?: React.ReactNode
+  children?: React.ReactNode;
 }

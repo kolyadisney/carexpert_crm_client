@@ -30,6 +30,9 @@ import {
   IPartModalProps,
 } from './components/part/types';
 
+import { CreateUpdateUserModal } from './components/user';
+import { ICreateUpdateUserModalProps } from './components/user/types';
+
 export enum EModalsMap {
   UPDATE_CREATE_CLIENT = 'UPDATE_CREATE_CLIENT',
   UPDATE_CREATE_CAR = 'UPDATE_CREATE_CAR',
@@ -40,6 +43,7 @@ export enum EModalsMap {
   CREATE_UPDATE_ORDER = 'CREATE_UPDATE_ORDER',
   CREATE_UPDATE_PART = 'CREATE_UPDATE_PART',
   CREATE_UPDATE_ORDER_PARTS = 'CREATE_UPDATE_ORDER_PARTS',
+  CREATE_UPDATE_USER = 'CREATE_UPDATE_USER',
 }
 
 export interface IModalsMapTree {
@@ -52,6 +56,7 @@ export interface IModalsMapTree {
   CREATE_UPDATE_ORDER: React.FC<any>;
   CREATE_UPDATE_PART: React.FC<IPartModalProps>;
   CREATE_UPDATE_ORDER_PARTS: React.FC<IOrderPartsModalProps>;
+  CREATE_UPDATE_USER: React.FC<ICreateUpdateUserModalProps>;
 }
 
 export const getModalsMap = (): IModalsMapTree => ({
@@ -64,4 +69,5 @@ export const getModalsMap = (): IModalsMapTree => ({
   [EModalsMap.CREATE_UPDATE_ORDER]: CreateUpdateOrderModal,
   [EModalsMap.CREATE_UPDATE_PART]: CreateUpdatePartModal,
   [EModalsMap.CREATE_UPDATE_ORDER_PARTS]: CreateUpdateOrderPartsModal,
+  [EModalsMap.CREATE_UPDATE_USER]: CreateUpdateUserModal,
 });

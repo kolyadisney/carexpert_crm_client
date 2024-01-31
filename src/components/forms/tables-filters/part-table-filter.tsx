@@ -2,10 +2,7 @@ import React from 'react';
 import { Form, Input } from 'antd';
 import debounce from 'lodash.debounce';
 import { useAppDispatch } from '@/redux/hook';
-import {
-  setCarSearchText,
-  setPartSearchText,
-} from '@/redux/slice/filtersSlice';
+import { setPartSearchText } from '@/redux/slice/filtersSlice';
 
 export const PartTableFilter = () => {
   const dispatch = useAppDispatch();

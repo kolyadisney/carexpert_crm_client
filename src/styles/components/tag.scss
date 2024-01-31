@@ -1,0 +1,41 @@
+.ant-tag {
+  &.new {
+    @apply bg-red-700/50 border-red-700 font-bold text-white/90
+  }
+
+  &.rejected {
+    @apply bg-gray-500/50 border-gray-500 font-bold text-white/90
+  }
+
+  &.in-progress{
+    @apply bg-green-700/50 border-green-700 font-bold text-white/90
+  }
+
+  &.completed {
+    @apply bg-blue-800/50 border-blue-800 font-bold text-white/90
+  }
+
+  &.hold {
+    @apply bg-yellow-700/50 border-yellow-700 font-bold text-white/90
+  }
+
+  &.in-stock {
+    @apply bg-lime-700/50 border-lime-700 font-bold text-white/90
+  }
+
+  &.out-of-stock {
+    @apply bg-red-700/50 border-red-700 font-bold text-white/90
+  }
+
+  &.owner {
+    @apply bg-orange-700/50 font-bold border-orange-700 text-white/90
+  }
+
+  &.admin {
+    @apply bg-rose-700/50 font-bold border-rose-700 text-white/90
+  }
+
+  &.user {
+    @apply bg-lime-700/50 font-bold border-lime-700 text-white/90
+  }
+}

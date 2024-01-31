@@ -2,7 +2,7 @@
 import Image from 'next/image';
 import { Layout, Menu } from 'antd';
 import { usePathname, useRouter } from 'next/navigation';
-import { ItemType, MenuItemType } from 'antd/es/menu/hooks/useItems';
+import { ItemType } from 'antd/es/menu/hooks/useItems';
 import React, { useState } from 'react';
 import { routes } from '@/routes';
 import { IRoute, TPageNames } from '@/routes/types';
@@ -13,7 +13,7 @@ export const Sidebar: React.FC<any> = () => {
   const redirect = useRouter();
   const isMobile = useIsBreakpoint(BreakPoint.MD);
   const [isCollapsed, setIsCollapsed] = useState(false);
-  const menuItems: ItemType<MenuItemType>[] = Object.values(routes)
+  const menuItems: ItemType[] = Object.values(routes)
     .map((route: IRoute) => {
       if (route.isMenuItem) {
         if (route.children) {
@@ -39,6 +39,16 @@ export const Sidebar: React.FC<any> = () => {
       return null;
     })
     .filter(Boolean);
+  const selectedKeys: string[] = React.useMemo(() => {
+    return Object.values(routes)
+      .map((route: IRoute) => {
+        if (pathname.includes(route.link())) {
+          return route.link();
+        }
+        return '';
+      })
+      .filter(Boolean);
+  }, [pathname]);
   return (
     <>
       {!isMobile ? (
@@ -69,7 +79,7 @@ export const Sidebar: React.FC<any> = () => {
           </div>
           <Menu
             mode="inline"
-            selectedKeys={[pathname]}
+            selectedKeys={selectedKeys.length > 0 ? selectedKeys : [pathname]}
             defaultSelectedKeys={['/']}
             className={'app-menu'}
             items={menuItems}

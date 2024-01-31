@@ -9,6 +9,9 @@ import { useAppDispatch } from '@/redux/hook';
 import { closeModal } from '@/redux/slice/modalSlice';
 import { IComponentOwnProps } from '@/components/forms/appointment/types';
 import { ActionTypes } from '@/enums/action-types';
+import { useForm } from 'antd/es/form/Form';
+import { useFormValidate } from '@/hooks/useFormValidate';
+import { VALIDATION_MESSAGE } from '@/enums/validation-messages';
 
 export const CreateUpdateAppointmentForm: React.FC<IComponentOwnProps> = ({
   actionType,
@@ -17,6 +20,8 @@ export const CreateUpdateAppointmentForm: React.FC<IComponentOwnProps> = ({
 }) => {
   const [createAppointment] = useCreateAppointmentMutation();
   const [updateAppointment] = useUpdateAppointmentMutation();
+  const [form] = useForm();
+  const { validate, isErrors } = useFormValidate(form);
   const dispatch = useAppDispatch();
   const disabledMinutes = () => {
     const minutesToDisabled = [];
@@ -73,8 +78,14 @@ export const CreateUpdateAppointmentForm: React.FC<IComponentOwnProps> = ({
       onFinish={onSubmit}
       layout={'vertical'}
       initialValues={formattedInitialValues}
+      form={form}
+      onValuesChange={validate}
     >
-      <Form.Item label={'Дата и время записи'} name={'date_time'}>
+      <Form.Item
+        label={'Дата и время записи'}
+        name={'date_time'}
+        rules={[{ required: true, message: VALIDATION_MESSAGE.REQUIRED }]}
+      >
         <DatePicker
           className={'w-full'}
           showTime={{
@@ -87,16 +98,28 @@ export const CreateUpdateAppointmentForm: React.FC<IComponentOwnProps> = ({
           format="YYYY-MM-DD HH:mm"
         />
       </Form.Item>
-      <Form.Item label={'Клиент'} name={'custom_client'}>
-        <Input type={'text'} />
+      <Form.Item
+        label={'Клиент'}
+        name={'custom_client'}
+        rules={[{ required: true, message: VALIDATION_MESSAGE.REQUIRED }]}
+      >
+        <Input type={'text'} allowClear />
       </Form.Item>
-      <Form.Item label={'Авто'} name={'custom_car'}>
-        <Input type={'text'} />
+      <Form.Item
+        label={'Авто'}
+        name={'custom_car'}
+        rules={[{ required: true, message: VALIDATION_MESSAGE.REQUIRED }]}
+      >
+        <Input type={'text'} allowClear />
       </Form.Item>
-      <Form.Item label={'Описание'} name={'description'}>
-        <Input type={'text'} />
+      <Form.Item
+        label={'Описание'}
+        name={'description'}
+        rules={[{ required: true, message: VALIDATION_MESSAGE.REQUIRED }]}
+      >
+        <Input type={'text'} allowClear />
       </Form.Item>
-      <Button type={'primary'} htmlType={'submit'}>
+      <Button type={'primary'} htmlType={'submit'} disabled={isErrors}>
         Сохранить
       </Button>
     </Form>

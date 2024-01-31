@@ -1,19 +1,9 @@
 'use client';
 import React from 'react';
-import {
-  Button,
-  Carousel,
-  Col,
-  Form,
-  Input,
-  notification,
-  Row,
-  Typography,
-} from 'antd';
+import { Button, Form, Input, notification, Typography } from 'antd';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { routes } from '@/routes';
-import Image from 'next/image';
 
 const LoginPage = () => {
   const router = useRouter();
@@ -41,10 +31,10 @@ const LoginPage = () => {
       <Typography.Title level={3}>Вход</Typography.Title>
       <Form onFinish={handleSubmit}>
         <Form.Item name={'login'}>
-          <Input type={'email'} />
+          <Input type={'email'} allowClear />
         </Form.Item>
         <Form.Item name={'password'}>
-          <Input.Password />
+          <Input.Password allowClear />
         </Form.Item>
         <Button htmlType={'submit'} type={'primary'} loading={loading} block>
           Войти

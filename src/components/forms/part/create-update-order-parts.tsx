@@ -5,11 +5,7 @@ import { useGetAllPartsQuery } from '@/redux/api/part';
 import { IOrderPart } from '@/redux/api/order/types';
 import { closeModal } from '@/redux/slice/modalSlice';
 import debounce from 'lodash.debounce';
-import {
-  setPartFilters,
-  setPartSearchText,
-  setServiceSearchText,
-} from '@/redux/slice/filtersSlice';
+import { setPartSearchText } from '@/redux/slice/filtersSlice';
 import { useAppDispatch, useAppSelector } from '@/redux/hook';
 import { CloseOutlined, PlusOutlined } from '@ant-design/icons';
 import { IPart } from '@/redux/api/part/types';
@@ -128,7 +124,7 @@ export const CreateUpdateOrderPartsForm: React.FC<
         </div>
       </Form.Item>
       <Form.Item name={'searchText'}>
-        <Input type={'text'} placeholder={'Поиск'} />
+        <Input type={'text'} placeholder={'Поиск'} allowClear />
       </Form.Item>
       <Table
         dataSource={data?.data || []}

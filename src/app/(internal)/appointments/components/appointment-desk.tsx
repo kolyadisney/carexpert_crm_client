@@ -7,7 +7,7 @@ import {
   Table,
   Tooltip,
 } from 'antd';
-import dayjs, { Dayjs } from 'dayjs';
+import dayjs from 'dayjs';
 import { ColumnProps } from 'antd/es/table';
 import {
   useDeleteAppointmentMutation,

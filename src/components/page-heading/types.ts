@@ -1,6 +1,7 @@
 import { SizeType } from 'antd/es/config-provider/SizeContext';
 import { ButtonHTMLType, ButtonShape, ButtonType } from 'antd/es/button';
 import { TooltipProps } from 'antd';
+import React from 'react';
 
 export interface IPageHeadingAction {
   tooltip?: TooltipProps;

@@ -1,5 +1,4 @@
 import { AutoCompleteProps, FormInstance } from 'antd';
-import { Rule } from 'async-validator';
 
 export interface IBrandsAutoCompleteOwnProps {
   form: FormInstance;

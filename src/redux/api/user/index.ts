@@ -13,15 +13,36 @@ export const userApi = createApi({
         url: endpoint.user.FETCH_ALL_USERS,
         params,
       }),
+      providesTags: ['Users'],
     }),
     getCurrentUser: builder.query<IUser, null>({
       query: () => ({
         url: endpoint.user.FETCH_CURRENT_USER,
         method: 'GET',
       }),
-      providesTags: ['DependsAuth'],
+    }),
+    createUser: builder.mutation<IUser, Omit<IUser, 'id'>>({
+      query: (payload) => ({
+        url: endpoint.auth.REGISTER,
+        body: payload,
+        method: 'POST',
+      }),
+      invalidatesTags: ['Users'],
+    }),
+    updateUser: builder.mutation<IUser, any>({
+      query: ({ id, payload }) => ({
+        url: endpoint.user.UPDATE_USER(id),
+        body: payload,
+        method: 'PATCH',
+      }),
+      invalidatesTags: ['Users'],
     }),
   }),
 });
 
-export const { useGetCurrentUserQuery, useGetAllUsersQuery } = userApi;
+export const {
+  useGetCurrentUserQuery,
+  useGetAllUsersQuery,
+  useCreateUserMutation,
+  useUpdateUserMutation,
+} = userApi;

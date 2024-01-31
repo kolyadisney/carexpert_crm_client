@@ -3,7 +3,6 @@ import { endpoint } from '@/services/api/endpoints';
 import { createBaseQuery } from '@/redux/createBaseQuery';
 import { IQueryParams, IResponseData } from '@/redux/types';
 import { IOrder } from '@/redux/api/order/types';
-import { IPart } from '@/redux/api/part/types';
 
 export const orderApi = createApi({
   reducerPath: 'orderApi',

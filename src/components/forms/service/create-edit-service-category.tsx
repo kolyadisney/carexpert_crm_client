@@ -9,12 +9,15 @@ import {
 } from '@/redux/api/service';
 import { useAppDispatch } from '@/redux/hook';
 import { closeModal } from '@/redux/slice/modalSlice';
+import { useFormValidate } from '@/hooks/useFormValidate';
+import { VALIDATION_MESSAGE } from '@/enums/validation-messages';
 
 export const CreateEditServiceCategoryForm: React.FC<IComponentOwnProps> = ({
   actionType,
   initialValues,
 }) => {
   const [form] = useForm();
+  const { validate, isErrors } = useFormValidate(form);
   const [createCategory, { isLoading }] = useCreateServiceCategoryMutation();
   const [updateCategory, { isLoading: isUpdating }] =
     useUpdateServiceCategoryMutation();
@@ -43,14 +46,24 @@ export const CreateEditServiceCategoryForm: React.FC<IComponentOwnProps> = ({
       layout={'vertical'}
       initialValues={initialValues}
       onFinish={onSubmit}
+      onValuesChange={validate}
     >
-      <Form.Item name={'name'}>
-        <Input type={'text'} />
+      <Form.Item
+        name={'name'}
+        rules={[
+          {
+            required: true,
+            message: VALIDATION_MESSAGE.REQUIRED,
+          },
+        ]}
+      >
+        <Input type={'text'} allowClear />
       </Form.Item>
       <Button
         type={'primary'}
         htmlType={'submit'}
         loading={isLoading || isUpdating}
+        disabled={isErrors}
       >
         Сохранить
       </Button>

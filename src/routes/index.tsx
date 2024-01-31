@@ -39,7 +39,6 @@ export const routes: IRoutesTree = {
       return this.path;
     },
     icon: <ProfileOutlined />,
-    isMenuItem: true,
   },
   clients: {
     path: '/clients',

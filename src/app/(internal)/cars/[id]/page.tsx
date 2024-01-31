@@ -10,18 +10,26 @@ import {
   Popconfirm,
   Row,
   Skeleton,
+  Table,
+  TableColumnProps,
+  Tag,
+  Tooltip,
+  Typography,
 } from 'antd';
 import { useDeleteCarMutation, useGetCarByIdQuery } from '@/redux/api/car';
-import {
-  DeleteOutlined,
-  EditOutlined,
-  ReloadOutlined,
-} from '@ant-design/icons';
+import { DeleteOutlined, EditOutlined, EyeOutlined } from '@ant-design/icons';
 import { openModal } from '@/redux/slice/modalSlice';
 import { EModalsMap } from '@/components/modals/config';
 import { useAppDispatch } from '@/redux/hook';
 import { ActionTypes } from '@/enums/action-types';
 import { routes } from '@/routes';
+import { IOrder } from '@/redux/api/order/types';
+import dayjs from 'dayjs';
+import {
+  OrderStatus,
+  OrderStatusColor,
+  OrderStatusName,
+} from '@/enums/order-status';
 
 const CarPage = () => {
   const params = useParams();
@@ -89,6 +97,44 @@ const CarPage = () => {
       ),
     },
   ];
+  const columns: TableColumnProps<IOrder>[] = [
+    {
+      title: 'Дата',
+      key: 'created_at',
+      dataIndex: 'created_at',
+      render: (created_at: string) => dayjs(created_at).format('DD.MM.YYYY'),
+    },
+    {
+      title: 'Описание',
+      key: 'description',
+      dataIndex: 'description',
+    },
+    {
+      title: 'Статус заказа',
+      key: 'status',
+      dataIndex: 'status',
+      render: (status: OrderStatus) => (
+        <Tag className={OrderStatusColor[status]}>
+          {OrderStatusName[status]}
+        </Tag>
+      ),
+    },
+    {
+      title: '',
+      key: 'id',
+      dataIndex: 'id',
+      render: (id: string) => (
+        <Tooltip placement={'top'} title={'Просмотреть'}>
+          <Button
+            type={'primary'}
+            icon={<EyeOutlined />}
+            onClick={() => router.push(routes['order'].link(id))}
+            size={'small'}
+          />
+        </Tooltip>
+      ),
+    },
+  ];
   return (
     <Box>
       <Skeleton loading={isLoading}>
@@ -106,7 +152,10 @@ const CarPage = () => {
               size={'small'}
             />
           </Col>
-          <Col span={24}>Заказы</Col>
+          <Col span={24}>
+            <Typography.Title level={4}>Заказы</Typography.Title>
+            <Table columns={columns} size={'small'} dataSource={car?.orders} />
+          </Col>
         </Row>
       </Skeleton>
     </Box>

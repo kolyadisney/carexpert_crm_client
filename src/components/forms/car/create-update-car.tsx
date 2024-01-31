@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import { AutoComplete, Button, Form, Input, notification, Select } from 'antd';
+import { Button, Form, Input, notification, Select } from 'antd';
 import {
   BrandsAutocomplete,
   ClientsAutocomplete,
@@ -12,15 +12,18 @@ import { ICreateCarPayload } from '@/redux/api/car/types';
 import { useAppDispatch, useAppSelector } from '@/redux/hook';
 import { closeModal } from '@/redux/slice/modalSlice';
 import { ActionTypes } from '@/enums/action-types';
-import { CarType, CarTypeName } from '@/enums/car-type';
+import { CarTypeName } from '@/enums/car-type';
+import { VALIDATION_MESSAGE } from '@/enums/validation-messages';
+import { useFormValidate } from '@/hooks/useFormValidate';
 
-export const CarCreateForm: React.FC<any> = ({
+export const CreateUpdateCar: React.FC<any> = ({
   client_id,
   withClientField,
   initialValues,
   actionType,
 }) => {
   const [form] = useForm();
+  const { validate, isErrors } = useFormValidate(form);
   const [createCar, { isLoading }] = useCreateCarMutation();
   const [updateCar, { isLoading: isUpdatingCar }] = useUpdateCarMutation();
   const modalPrivateData = useAppSelector((state) => state.modal.privateData);
@@ -37,7 +40,8 @@ export const CarCreateForm: React.FC<any> = ({
         notification.success({
           message: 'Авто успешно добавлен',
         });
-      } else {
+      }
+      if (actionType === ActionTypes.EDIT) {
         notification.success({
           message: 'Авто успешно обновлен',
         });
@@ -53,6 +57,7 @@ export const CarCreateForm: React.FC<any> = ({
       layout={'vertical'}
       onFinish={onSubmit}
       initialValues={initialValues}
+      onValuesChange={validate}
     >
       <Form.Item
         label={'Номер авто'}
@@ -60,11 +65,11 @@ export const CarCreateForm: React.FC<any> = ({
         rules={[
           {
             required: true,
-            message: 'Это поле обязательное',
+            message: VALIDATION_MESSAGE.REQUIRED,
           },
         ]}
       >
-        <Input type={'text'} />
+        <Input type={'text'} allowClear />
       </Form.Item>
       <Form.Item
         label={'VIN'}
@@ -72,7 +77,7 @@ export const CarCreateForm: React.FC<any> = ({
         rules={[
           {
             required: true,
-            message: 'Это поле обязательное',
+            message: VALIDATION_MESSAGE.REQUIRED,
           },
           {
             min: 17,
@@ -84,7 +89,7 @@ export const CarCreateForm: React.FC<any> = ({
           },
         ]}
       >
-        <Input type={'text'} />
+        <Input type={'text'} allowClear />
       </Form.Item>
       <BrandsAutocomplete
         form={form}
@@ -93,7 +98,7 @@ export const CarCreateForm: React.FC<any> = ({
         rules={[
           {
             required: true,
-            message: 'Это поле обязательное',
+            message: VALIDATION_MESSAGE.REQUIRED,
           },
         ]}
       />
@@ -104,7 +109,7 @@ export const CarCreateForm: React.FC<any> = ({
         rules={[
           {
             required: true,
-            message: 'Это поле обязательное',
+            message: VALIDATION_MESSAGE.REQUIRED,
           },
         ]}
       />
@@ -114,7 +119,7 @@ export const CarCreateForm: React.FC<any> = ({
         rules={[
           {
             required: true,
-            message: 'Это поле обязательное',
+            message: VALIDATION_MESSAGE.REQUIRED,
           },
         ]}
       >
@@ -130,11 +135,11 @@ export const CarCreateForm: React.FC<any> = ({
         rules={[
           {
             required: true,
-            message: 'Это поле обязательное',
+            message: VALIDATION_MESSAGE.REQUIRED,
           },
         ]}
       >
-        <Input type={'text'} />
+        <Input type={'text'} allowClear />
       </Form.Item>
       <Form.Item
         label={'Цвет'}
@@ -142,11 +147,11 @@ export const CarCreateForm: React.FC<any> = ({
         rules={[
           {
             required: true,
-            message: 'Это поле обязательное',
+            message: VALIDATION_MESSAGE.REQUIRED,
           },
         ]}
       >
-        <Input type={'text'} />
+        <Input type={'text'} allowClear />
       </Form.Item>
       {withClientField && (
         <ClientsAutocomplete
@@ -156,7 +161,7 @@ export const CarCreateForm: React.FC<any> = ({
           rules={[
             {
               required: true,
-              message: 'Это поле обязательное',
+              message: VALIDATION_MESSAGE.REQUIRED,
             },
           ]}
         />
@@ -165,6 +170,7 @@ export const CarCreateForm: React.FC<any> = ({
         type={'primary'}
         htmlType={'submit'}
         loading={isLoading || isUpdatingCar}
+        disabled={isErrors}
       >
         Сохранить
       </Button>

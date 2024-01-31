@@ -1,7 +1,6 @@
 import { PaginationProps, PaginationConfig } from 'antd/lib/pagination';
 import { SorterResult } from 'antd/es/table/interface';
 import { Storage } from '@/services/storage';
-import { TableProps } from 'antd';
 
 export const scroll = {
   xs: { x: 300 },

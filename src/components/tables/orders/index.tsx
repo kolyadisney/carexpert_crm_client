@@ -18,7 +18,6 @@ import {
 import { TABLE_NAME } from '@/components/tables/clients/config';
 import { useAppDispatch, useAppSelector } from '@/redux/hook';
 import { setOrderFilters } from '@/redux/slice/filtersSlice';
-import { ColumnProps } from 'antd/es/table';
 
 export const TableOrders: React.FC<IComponentOwnProps> = ({
   loading,
@@ -27,11 +26,6 @@ export const TableOrders: React.FC<IComponentOwnProps> = ({
 }) => {
   const router = useRouter();
   const filters = useAppSelector((state) => state.filters.orderFilters);
-  const statuses = Object.keys(OrderStatusName).map((status) => ({
-    text: OrderStatusName[status],
-    key: status,
-    value: status,
-  }));
   const dispatch = useAppDispatch();
   const columns: any = [
     {
@@ -72,9 +66,6 @@ export const TableOrders: React.FC<IComponentOwnProps> = ({
       title: 'Статус заказа',
       key: 'status',
       dataIndex: 'status',
-      filters: statuses,
-      onFilter: (value: string, record: any) =>
-        record.status.indexOf(value) === 0,
       render: (status: string) => {
         return (
           <Tag className={OrderStatusColor[status]}>

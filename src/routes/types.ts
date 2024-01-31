@@ -1,5 +1,3 @@
-import { IconDefinition } from '@ant-design/icons-svg/es/types';
-
 export interface IRoute {
   path: string;
   name(...args: any[]): string;

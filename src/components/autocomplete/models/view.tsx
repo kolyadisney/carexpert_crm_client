@@ -1,7 +1,6 @@
 import React from 'react';
 import { TBrandsAutoCompleteProps } from './types';
-import { array2options } from '@/utils/convert';
-import { AutoComplete, Form, Select } from 'antd';
+import { Form, Select } from 'antd';
 import { useAppSelector } from '@/redux/hook';
 
 export const ModelsAutocomplete: React.FC<TBrandsAutoCompleteProps> = ({

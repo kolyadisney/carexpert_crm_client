@@ -16,6 +16,8 @@ import { OrderStatusColor, OrderStatusName } from '@/enums/order-status';
 import { ActionTypes } from '@/enums/action-types';
 import TextArea from 'antd/es/input/TextArea';
 import { useForm } from 'antd/es/form/Form';
+import { useFormValidate } from '@/hooks/useFormValidate';
+import { VALIDATION_MESSAGE } from '@/enums/validation-messages';
 
 export const CreateUpdateOrderForm: React.FC<ICreateUpdateOrderFormProps> = ({
   actionType,
@@ -28,6 +30,7 @@ export const CreateUpdateOrderForm: React.FC<ICreateUpdateOrderFormProps> = ({
   const [createOrder] = useCreateOrderMutation();
   const dispatch = useAppDispatch();
   const [form] = useForm();
+  const { validate, isErrors } = useFormValidate(form);
 
   React.useEffect(() => {
     clients && setClientsData(clients?.data);
@@ -66,8 +69,18 @@ export const CreateUpdateOrderForm: React.FC<ICreateUpdateOrderFormProps> = ({
       layout={'vertical'}
       onFinish={onSubmit}
       form={form}
+      onValuesChange={validate}
     >
-      <Form.Item label={'Клиент'} name={'client_id'}>
+      <Form.Item
+        label={'Клиент'}
+        name={'client_id'}
+        rules={[
+          {
+            required: true,
+            message: VALIDATION_MESSAGE.REQUIRED,
+          },
+        ]}
+      >
         <Select onSearch={onSearchClient} onSelect={onSelectClient}>
           {clientsData.length &&
             clientsData.map((client: IClient) => (
@@ -77,7 +90,16 @@ export const CreateUpdateOrderForm: React.FC<ICreateUpdateOrderFormProps> = ({
             ))}
         </Select>
       </Form.Item>
-      <Form.Item label={'Авто'} name={'car_id'}>
+      <Form.Item
+        label={'Авто'}
+        name={'car_id'}
+        rules={[
+          {
+            required: true,
+            message: VALIDATION_MESSAGE.REQUIRED,
+          },
+        ]}
+      >
         <Select>
           {carsData.length &&
             carsData.map((car: ICar) => (
@@ -87,10 +109,28 @@ export const CreateUpdateOrderForm: React.FC<ICreateUpdateOrderFormProps> = ({
             ))}
         </Select>
       </Form.Item>
-      <Form.Item label={'Описание'} name={'description'}>
+      <Form.Item
+        label={'Описание'}
+        name={'description'}
+        rules={[
+          {
+            required: true,
+            message: VALIDATION_MESSAGE.REQUIRED,
+          },
+        ]}
+      >
         <TextArea />
       </Form.Item>
-      <Form.Item label={'Пробег'} name={'odometer'}>
+      <Form.Item
+        label={'Пробег'}
+        name={'odometer'}
+        rules={[
+          {
+            required: true,
+            message: VALIDATION_MESSAGE.REQUIRED,
+          },
+        ]}
+      >
         <InputNumber className={'w-full'} />
       </Form.Item>
       {actionType !== ActionTypes.ADD && (
@@ -106,7 +146,7 @@ export const CreateUpdateOrderForm: React.FC<ICreateUpdateOrderFormProps> = ({
           </Select>
         </Form.Item>
       )}
-      <Button type={'primary'} htmlType={'submit'}>
+      <Button type={'primary'} htmlType={'submit'} disabled={isErrors}>
         Сохранить
       </Button>
     </Form>

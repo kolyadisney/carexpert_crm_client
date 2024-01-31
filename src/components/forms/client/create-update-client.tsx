@@ -10,13 +10,17 @@ import { ICreateClientPayload } from '@/redux/api/client/types';
 import { VALIDATION_MESSAGE } from '@/enums/validation-messages';
 import { IComponentOwnProps } from '@/components/forms/client/types';
 import { ActionTypes } from '@/enums/action-types';
+import { useForm } from 'antd/es/form/Form';
+import { useFormValidate } from '@/hooks/useFormValidate';
 
-export const CreateClientForm: React.FC<IComponentOwnProps> = ({
+export const CreateUpdateClientForm: React.FC<IComponentOwnProps> = ({
   initialValues,
   actionType,
 }) => {
   const [createClient, { isLoading }] = useCreateClientMutation();
   const [updateClient, { isLoading: isUpdating }] = useUpdateClientMutation();
+  const [form] = useForm();
+  const { validate, isErrors } = useFormValidate(form);
   const dispatch = useAppDispatch();
   const onSubmit = async (payload: ICreateClientPayload) => {
     try {
@@ -25,7 +29,8 @@ export const CreateClientForm: React.FC<IComponentOwnProps> = ({
         notification.success({
           message: 'Клиент успешно создан',
         });
-      } else {
+      }
+      if (actionType === ActionTypes.EDIT) {
         await updateClient({ payload, id: initialValues?.id! });
         notification.success({
           message: 'Клиент успешно обновлен',
@@ -33,10 +38,15 @@ export const CreateClientForm: React.FC<IComponentOwnProps> = ({
       }
       dispatch(closeModal());
     } catch {}
-    dispatch(closeModal());
   };
   return (
-    <Form layout={'vertical'} onFinish={onSubmit} initialValues={initialValues}>
+    <Form
+      layout={'vertical'}
+      onFinish={onSubmit}
+      initialValues={initialValues}
+      form={form}
+      onValuesChange={validate}
+    >
       <Form.Item
         label={'Имя'}
         name={'first_name'}
@@ -47,7 +57,7 @@ export const CreateClientForm: React.FC<IComponentOwnProps> = ({
           },
         ]}
       >
-        <Input type={'text'} size={'middle'} bordered />
+        <Input type={'text'} size={'middle'} bordered allowClear />
       </Form.Item>
       <Form.Item
         label={'Фамилия'}
@@ -59,7 +69,7 @@ export const CreateClientForm: React.FC<IComponentOwnProps> = ({
           },
         ]}
       >
-        <Input type={'text'} size={'middle'} bordered />
+        <Input type={'text'} size={'middle'} bordered allowClear />
       </Form.Item>
       <Form.Item
         label={'Номер телефона'}
@@ -76,7 +86,7 @@ export const CreateClientForm: React.FC<IComponentOwnProps> = ({
           },
         ]}
       >
-        <Input type={'phone'} size={'middle'} bordered />
+        <Input type={'phone'} size={'middle'} bordered allowClear />
       </Form.Item>
       <Form.Item
         label={'Ел. почта'}
@@ -92,12 +102,13 @@ export const CreateClientForm: React.FC<IComponentOwnProps> = ({
           },
         ]}
       >
-        <Input type={'email'} size={'middle'} bordered />
+        <Input type={'email'} size={'middle'} bordered allowClear />
       </Form.Item>
       <Button
         type={'primary'}
         htmlType={'submit'}
         loading={isLoading || isUpdating}
+        disabled={isErrors}
       >
         Сохранить
       </Button>

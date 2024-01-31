@@ -2,12 +2,11 @@
 import { Avatar, Tag, Typography } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import React, { memo } from 'react';
 import { Loader } from '@/components';
-import { UserRoles } from '@/enums/roles';
+import { UserRoleColors, UserRoleNames } from '@/enums/roles';
 import { useGetCurrentUserQuery } from '@/redux/api/user';
-import { routes } from '@/routes';
 import { BreakPoint, useIsBreakpoint } from '@/hooks/useIsBreakpoint';
 
 export const Header: React.FC<any> = memo(() => {
@@ -23,8 +22,8 @@ export const Header: React.FC<any> = memo(() => {
         {!isLoading && data && (
           <>
             {!isMobile && (
-              <Tag color={'volcano'} bordered>
-                {UserRoles[data.role]}
+              <Tag className={UserRoleColors[data?.role]}>
+                {UserRoleNames[data.role]}
               </Tag>
             )}
             <Typography.Text>

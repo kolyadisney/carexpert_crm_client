@@ -10,8 +10,8 @@ export const CreateUpdatePartModal: React.FC<IPartModalProps> = (props) => {
   return (
     <Modal {...modalParams} title={title} footer={null}>
       <CreateUpdatePartFrom
-        part_id={modalProps?.part_id}
         initialValues={modalProps?.initialValues}
+        actionType={actionType}
       />
     </Modal>
   );

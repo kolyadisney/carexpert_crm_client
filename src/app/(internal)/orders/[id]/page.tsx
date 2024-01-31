@@ -16,7 +16,7 @@ import {
 } from 'antd';
 import { useGetOrderByIdQuery } from '@/redux/api/order';
 import { IOrderPart, IOrderService } from '@/redux/api/order/types';
-import { IService, IServicePrice } from '@/redux/api/service/types';
+import { IServicePrice } from '@/redux/api/service/types';
 import { OrderStatusColor, OrderStatusName } from '@/enums/order-status';
 import {
   EditOutlined,
@@ -30,7 +30,6 @@ import { CarTypeName } from '@/enums/car-type';
 import Link from 'next/link';
 import { ActionTypes } from '@/enums/action-types';
 import dayjs from 'dayjs';
-import { IPart } from '@/redux/api/part/types';
 
 const OrderPage = () => {
   const params = useParams();

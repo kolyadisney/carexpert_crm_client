@@ -3,11 +3,10 @@ import React from 'react';
 import { Box, IPageHeadingAction, PageHeading } from '@/components';
 import { AppointmentDesk } from '@/app/(internal)/appointments/components/appointment-desk';
 import { routes } from '@/routes';
-import { DeleteOutlined, EditOutlined, PlusOutlined } from '@ant-design/icons';
+import { PlusOutlined } from '@ant-design/icons';
 import { openModal } from '@/redux/slice/modalSlice';
 import { EModalsMap } from '@/components/modals/config';
 import { ActionTypes } from '@/enums/action-types';
-import { Button, notification, Popconfirm } from 'antd';
 import { useAppDispatch } from '@/redux/hook';
 
 const AppointmentsPage = () => {

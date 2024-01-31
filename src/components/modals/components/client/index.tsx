@@ -1,6 +1,6 @@
 import React from 'react';
 import { Modal } from 'antd';
-import { CreateClientForm } from '@/components';
+import { CreateUpdateClientForm } from '@/components';
 import { IModalOwnProps } from '@/components/modals/components/client/types';
 
 export const UpdateCreateClient: React.FC<IModalOwnProps> = (props: any) => {
@@ -9,7 +9,7 @@ export const UpdateCreateClient: React.FC<IModalOwnProps> = (props: any) => {
 
   return (
     <Modal {...modalParams} title={title} footer={null}>
-      <CreateClientForm
+      <CreateUpdateClientForm
         initialValues={modalProps?.initialValues}
         actionType={actionType}
       />

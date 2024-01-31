@@ -3,9 +3,8 @@ import React from 'react';
 import {
   useDeleteServiceCategoryMutation,
   useGetAllServicesWithCategoryQuery,
-  useUpdateServiceCategoryMutation,
 } from '@/redux/api/service';
-import { Box, IPageHeadingAction, PageHeading, Preloader } from '@/components';
+import { Box, IPageHeadingAction, PageHeading } from '@/components';
 import { TableServices } from '@/components/tables/services';
 import { Button, Collapse, Popconfirm, Skeleton, Tooltip } from 'antd';
 import { IServicesWithCategory } from '@/redux/api/service/types';

@@ -1,9 +1,7 @@
 'use client';
 import React from 'react';
 import { ICategories, TServiceCategoryAutoCompleteProps } from './types';
-import { array2options } from '@/utils/convert';
 import { AutoComplete, Form } from 'antd';
-import debounce from 'lodash.debounce';
 import { useGetAllServicesWithCategoryQuery } from '@/redux/api/service';
 import { IServicesWithCategory } from '@/redux/api/service/types';
 import { setModalPrivateData } from '@/redux/slice/modalSlice';

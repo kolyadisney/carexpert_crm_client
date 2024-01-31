@@ -9,7 +9,7 @@ import dayjs from 'dayjs';
 import ruAntd from 'antd/locale/ru_RU';
 import ru from 'dayjs/locale/ru';
 import Providers from '@/redux/provider';
-import { Suspense } from 'react';
+import React, { Suspense } from 'react';
 import LoadingFallback from '@/app/(internal)/loading';
 import dayjsPluginUTC from 'dayjs/plugin/utc';
 import dayjsPluginTimezone from 'dayjs/plugin/timezone';

@@ -1,4 +1,3 @@
-import { ActionTypes } from '@/enums/action-types';
 import { IOrderService } from '@/redux/api/order/types';
 
 export interface ICreateUpdateOrderServiceProps {

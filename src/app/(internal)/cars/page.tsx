@@ -10,6 +10,7 @@ import { useGetCarsQuery } from '@/redux/api/car';
 import { useAppDispatch, useAppSelector } from '@/redux/hook';
 import { openModal } from '@/redux/slice/modalSlice';
 import { routes } from '@/routes';
+import { ActionTypes } from '@/enums/action-types';
 
 const CarsPage = () => {
   const dispatch = useAppDispatch();
@@ -40,6 +41,7 @@ const CarsPage = () => {
               modalProps: {
                 title: 'Добавить авто',
                 withClientField: true,
+                actionType: ActionTypes.ADD,
               },
             }),
           ),

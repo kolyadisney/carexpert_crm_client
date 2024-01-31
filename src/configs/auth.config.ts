@@ -2,7 +2,6 @@ import type { AuthOptions, User } from 'next-auth';
 import { NextAuthOptions } from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
 import { cookies } from 'next/headers';
-import { setCookie } from 'cookies-next';
 
 export const authConfig: AuthOptions = {
   pages: {

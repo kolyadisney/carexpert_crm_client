@@ -1,54 +1,27 @@
 'use client';
 import React from 'react';
-import {
-  useDeleteServiceCategoryMutation,
-  useGetAllServicesWithCategoryQuery,
-  useUpdateServiceCategoryMutation,
-} from '@/redux/api/service';
-import { Box, IPageHeadingAction, PageHeading, Preloader } from '@/components';
-import { TableServices } from '@/components/tables/services';
-import {
-  Button,
-  Col,
-  Collapse,
-  notification,
-  Popconfirm,
-  Row,
-  Skeleton,
-  Table,
-  Tag,
-  Tooltip,
-} from 'antd';
-import { IServicesWithCategory } from '@/redux/api/service/types';
+import { Box, IPageHeadingAction, PageHeading } from '@/components';
+import { Button, Col, Popconfirm, Row, Table, Tag, Tooltip } from 'antd';
 import {
   DeleteOutlined,
   EditOutlined,
-  EyeOutlined,
-  PlusCircleOutlined,
-  PlusOutlined,
   ReloadOutlined,
 } from '@ant-design/icons';
 import { openModal } from '@/redux/slice/modalSlice';
 import { EModalsMap } from '@/components/modals/config';
 import { ActionTypes } from '@/enums/action-types';
 import { useAppDispatch, useAppSelector } from '@/redux/hook';
-import { ServiceFilter } from '@/components/forms/tables-filters/service-filter';
 import { routes } from '@/routes';
 import { useDeletePartMutation, useGetAllPartsQuery } from '@/redux/api/part';
 import { IClient } from '@/redux/api/client/types';
-import ButtonGroup from 'antd/es/button/button-group';
-import {
-  PartStatus,
-  PartStatusColor,
-  PartStatusName,
-} from '@/enums/part-status';
+import { PartStatusColor, PartStatusName } from '@/enums/part-status';
 import { PartTableFilter } from '@/components/forms/tables-filters/part-table-filter';
 import {
   makeTableFilters,
   makeTablePagination,
 } from '@/components/tables/config';
 import { TABLE_NAME } from '@/components/tables/clients/config';
-import { setPartFilters, setServiceFilters } from '@/redux/slice/filtersSlice';
+import { setPartFilters } from '@/redux/slice/filtersSlice';
 import dayjs from 'dayjs';
 
 const PartsPage = () => {
@@ -80,6 +53,7 @@ const PartsPage = () => {
               name: EModalsMap.CREATE_UPDATE_PART,
               modalProps: {
                 title: 'Добавить запчасть',
+                actionType: ActionTypes.ADD,
               },
             }),
           ),
@@ -159,12 +133,11 @@ const PartsPage = () => {
                 onClick={() =>
                   dispatch(
                     openModal({
-                      name: EModalsMap.CREATE_UPDATE_APPOINTMENT,
+                      name: EModalsMap.CREATE_UPDATE_PART,
                       modalProps: {
-                        title: 'Редактирование записи',
+                        title: 'Редактирование запчасть',
                         actionType: ActionTypes.EDIT,
                         initialValues: record,
-                        data: data?.data,
                       },
                     }),
                   )

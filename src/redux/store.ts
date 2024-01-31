@@ -19,6 +19,8 @@ import { appointmentApi } from '@/redux/api/appointment';
 import { deleteCookie, getCookie, setCookie } from 'cookies-next';
 import { orderApi } from '@/redux/api/order';
 import { partApi } from '@/redux/api/part';
+import router from 'next/router';
+import { routes } from '@/routes';
 
 export const rtkQueryErrorLogger: Middleware =
   (api: MiddlewareAPI) => (next) => async (action) => {
@@ -53,7 +55,13 @@ export const rtkQueryErrorLogger: Middleware =
             deleteCookie('access_token');
             deleteCookie('refresh_token');
             await signOut();
+            await router.push(routes['login'].link());
           }
+        } else {
+          deleteCookie('access_token');
+          deleteCookie('refresh_token');
+          await signOut();
+          await router.push(routes['login'].link());
         }
       }
 

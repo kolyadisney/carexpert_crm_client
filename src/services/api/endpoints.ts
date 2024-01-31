@@ -1,10 +1,13 @@
 export const endpoint = {
   auth: {
     REFRESH_TOKEN: '/auth/refresh',
+    REGISTER: '/auth/register',
   },
   user: {
     FETCH_ALL_USERS: '/user',
     FETCH_CURRENT_USER: '/user/me',
+    CREATE_USER: '/user',
+    UPDATE_USER: (id: string) => `/user/${id}`,
   },
   client: {
     FETCH_ALL_CLIENTS: '/client',

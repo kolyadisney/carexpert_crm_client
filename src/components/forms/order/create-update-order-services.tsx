@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Form, Input, Select, Table, TableProps, Tag } from 'antd';
+import { Button, Form, Input, Table, TableProps, Tag } from 'antd';
 import { IService } from '@/redux/api/service/types';
 import { CloseOutlined, PlusOutlined } from '@ant-design/icons';
 import { useGetAllServicesQuery } from '@/redux/api/service';
@@ -112,7 +112,7 @@ export const CreateUpdateOrderServicesForm: React.FC<
         </div>
       </Form.Item>
       <Form.Item name={'searchText'}>
-        <Input type={'text'} placeholder={'Поиск'} />
+        <Input type={'text'} placeholder={'Поиск'} allowClear />
       </Form.Item>
       <Table
         dataSource={data?.data || []}
